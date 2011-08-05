@@ -85,7 +85,7 @@
 /*for PS command 03h*/
 #define CM3628_PS_MS			(1 << 4)
 #define CM3628_PS_HYS			(1 << 0)
-#define CM3628_PS_SMART_PERS	(1 << 1)
+#define CM3628_PS_SMART_PERS		(1 << 1)
 #define CM3628_IT_4X_ES			(1 << 6)/*for integration time*/
 #define CM3628_IT_4X_MP			(1 << 7)/*for integration time*/
 
@@ -126,6 +126,7 @@ struct cm3628_platform_data {
 	uint8_t ps_adc_offset2;
 	uint8_t ps_debounce;
 	uint16_t ps_delay_time;
+	uint8_t ps_reset_thd;
 };
 
 #endif
