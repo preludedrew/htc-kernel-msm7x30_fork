@@ -24,20 +24,16 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
  */
 
-#include <linux/types.h>
-#include <linux/skbuff.h>
+#ifndef KGSL_POSTMORTEM_H
+#define KGSL_POSTMORTEM_H
 
-#ifndef _MSM_RMNET_SDIO_H
-#define _MSM_RMNET_SDIO_H
+struct kgsl_device;
 
-int msm_rmnet_sdio_open(uint32_t id, void *priv,
-			void (*receive_cb)(void *, struct sk_buff *),
-			void (*write_done)(void *, struct sk_buff *));
+void kgsl_postmortem_init(struct kgsl_device *device);
 
-int msm_rmnet_sdio_close(uint32_t id);
+int kgsl_postmortem_dump(struct kgsl_device *device, int manual);
 
-int msm_rmnet_sdio_write(uint32_t id, struct sk_buff *skb);
-
-#endif /* _MSM_RMNET_SDIO_H */
+#endif /* KGSL_POSTMORTEM_H */
