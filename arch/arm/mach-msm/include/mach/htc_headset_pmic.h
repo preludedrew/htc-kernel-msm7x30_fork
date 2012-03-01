@@ -72,6 +72,8 @@ struct htc_headset_pmic_platform_data {
 	unsigned int driver_flag;
 	unsigned int hpin_gpio;
 	unsigned int hpin_irq;
+	unsigned int key_gpio;
+	unsigned int key_irq;
 	unsigned int key_enable_gpio;
 	unsigned int hs_controller;
 	unsigned int hs_switch;
@@ -87,6 +89,7 @@ struct htc_35mm_pmic_info {
 	struct htc_headset_pmic_platform_data pdata;
 	unsigned int hpin_irq_type;
 	unsigned int hpin_debounce;
+	unsigned int key_irq_type;
 	struct wake_lock hs_wake_lock;
 };
 

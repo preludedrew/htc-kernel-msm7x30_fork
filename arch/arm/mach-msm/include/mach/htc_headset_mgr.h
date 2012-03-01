@@ -51,6 +51,10 @@
 	struct device_attribute dev_attr_##_name = \
 	__ATTR(flag, _mode, _show, _store)
 
+#define DEVICE_HEADSET_ATTR(_name, _mode, _show, _store) \
+	struct device_attribute dev_attr_headset_##_name = \
+	__ATTR(_name, _mode, _show, _store)
+
 #define DRIVER_HS_MGR_RPC_SERVER	(1 << 0)
 
 #define DEBUG_FLAG_LOG		(1 << 0)
@@ -130,11 +134,24 @@
 #define HS_MGR_KEYCODE_MEDIA	KEY_MEDIA		/* 226 */
 #define HS_MGR_KEYCODE_SEND	KEY_SEND		/* 231 */
 
+#ifdef CONFIG_MACH_EXPRESS
+enum {
+	HEADSET_UNPLUG		= 0,
+	HEADSET_NO_MIC		= 1,
+	HEADSET_MIC		= 2,
+	HEADSET_METRICO		= 3,
+	HEADSET_UNKNOWN_MIC	= 4,
+	HEADSET_TV_OUT		= 5,
+	HEADSET_BEATS		= 6,
+	HEADSET_INDICATOR	= 7,
+};
+#else
 #define HEADSET_NO_MIC		0
 #define HEADSET_MIC		1
 #define HEADSET_METRICO		2
 #define HEADSET_UNKNOWN_MIC	3
 #define HEADSET_TV_OUT		4
+#endif
 
 #define HTC_35MM_UNPLUG		0
 #define HTC_35MM_NO_MIC		1
@@ -198,6 +215,12 @@ struct external_headset {
 	int status;
 };
 
+struct headset_adc_config {
+	int type;
+	uint32_t adc_max;
+	uint32_t adc_min;
+};
+
 struct headset_notifier {
 	int id;
 	void *func;
@@ -219,6 +242,8 @@ struct htc_headset_mgr_platform_data {
 	unsigned int driver_flag;
 	int headset_devices_num;
 	struct platform_device **headset_devices;
+	int headset_config_num;
+	struct headset_adc_config *headset_config;
 
 	unsigned int hptv_det_hp_gpio;
 	unsigned int hptv_det_tv_gpio;
@@ -235,6 +260,7 @@ struct htc_headset_mgr_info {
 	struct external_headset usb_headset;
 
 	struct class *htc_accessory_class;
+	struct device *headset_dev;
 	struct device *tty_dev;
 	struct device *fm_dev;
 	struct device *debug_dev;
@@ -254,6 +280,11 @@ struct htc_headset_mgr_info {
 
 	/* The variables were used by 35mm headset*/
 	int key_level_flag;
+#ifdef CONFIG_MACH_EXPRESS
+
+	int hs_35mm_type;
+	int h2w_35mm_type;
+#endif
 	int ext_35mm_status;
 	int h2w_35mm_status;
 	int is_ext_insert;

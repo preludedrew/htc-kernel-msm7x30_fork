@@ -46,9 +46,11 @@
 #define MICROP_FUNCTION_OJ		18
 #define MICROP_FUNCTION_P		19
 
+#ifndef CONFIG_MACH_EXPRESS
 #define HEADSET_NO_MIC			0
 #define HEADSET_MIC			1
 #define HEADSET_METRICO			2
+#endif
 
 #define LED_RGB					(1 << 0)
 #define LED_JOGBALL				(1 << 1)
