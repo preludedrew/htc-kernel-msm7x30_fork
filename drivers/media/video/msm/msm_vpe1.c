@@ -314,8 +314,13 @@ static int vpe_update_scaler(struct video_crop_t *pcrop)
 
 	msm_io_w(src_roi, vpe_device->vpebase + VPE_SRC_SIZE_OFFSET);
 
+#ifdef CONFIG_MACH_EXPRESS
+	src_x = (out_ROI_width - src_ROI_width + 1)/2 - 1;
+	src_y = (out_ROI_height - src_ROI_height + 1)/2 - 1;
+#else
 	src_x = (out_ROI_width - src_ROI_width)/2;
 	src_y = (out_ROI_height - src_ROI_height)/2;
+#endif
 
 	CDBG("src_x = %d, src_y=%d.\n", src_x, src_y);
 
