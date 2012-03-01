@@ -221,14 +221,14 @@ obj-$(CONFIG_MACH_EXPRESS)+= board-express.o panel-lgwsvga-ld070ws1-7x30.o
 obj-$(CONFIG_MACH_EXPRESS)+= board-express-keypad.o
 obj-$(CONFIG_MACH_EXPRESS)+= board-express-microp.o
 obj-$(CONFIG_MACH_EXPRESS)+= board-express-audio.o
-obj-$(CONFIG_MACH_EXPRESS)+= board-express-mmc.o board-express-wifi.o htc_awb_cal.o
+obj-$(CONFIG_MACH_EXPRESS)+= board-common-wimax.o board-express-mmc.o board-express-wifi.o htc_awb_cal.o
 obj-$(CONFIG_MACH_EXPRESS)+= board-express-rfkill.o htc_bluetooth.o board-express-panel.o
 
 obj-$(CONFIG_MACH_EXPRESS_KT)+= board-express-kt.o panel-lgwsvga-ld070ws1-7x30.o
 obj-$(CONFIG_MACH_EXPRESS_KT)+= board-express-kt-keypad.o
 obj-$(CONFIG_MACH_EXPRESS_KT)+= board-express-kt-microp.o
 obj-$(CONFIG_MACH_EXPRESS_KT)+= board-express-kt-audio.o
-obj-$(CONFIG_MACH_EXPRESS_KT)+= board-express-kt-mmc.o board-express-kt-wifi.o htc_awb_cal.o
+obj-$(CONFIG_MACH_EXPRESS_KT)+= board-common-wimax.o board-express-kt-mmc.o board-express-kt-wifi.o htc_awb_cal.o
 obj-$(CONFIG_MACH_EXPRESS_KT)+= board-express-kt-rfkill.o htc_bluetooth.o board-express-kt-panel.o
 
 obj-$(CONFIG_MACH_DYNASTY)+= board-dynasty.o
