@@ -68,4 +68,4 @@ obj-$(CONFIG_MSM_HDMI_COMMON) += hdmi_common.o
 obj-$(CONFIG_MSM_HDMI) += hdmi/
 obj-$(CONFIG_MSM_VIDC_720P) += vidc/
 
-obj-$(CONFIG_MSM_HDMI_MHL) += mhl/
+obj-$(CONFIG_MSM_HDMI_MHL_SII9232) += mhl/sii9232/

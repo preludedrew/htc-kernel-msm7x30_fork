@@ -204,3 +204,9 @@ config MSM_HDMI_MHL
 	bool
 	default n
 
+config MSM_HDMI_MHL_SII9232
+	bool "support sii9232 driver"
+	depends on MSM_HDMI_MHL && MSM_MDP40
+	bool
+	default n
+
