@@ -58,6 +58,16 @@ unsigned int msm_dmov_build_crci_mask(int n, ...);
 #if defined(CONFIG_ARCH_MSM7X30)
 #define DMOV_SD_SIZE 0x400
 #define DMOV_SD_AARM 2
+#if defined(CONFIG_CRYPTO_DEV_QCRYPTO) || \
+		defined(CONFIG_CRYPTO_DEV_QCRYPTO_MODULE) || \
+		defined(CONFIG_CRYPTO_DEV_QCEDEV) || \
+		defined(CONFIG_CRYPTO_DEV_QCEDEV_MODULE)
+#define DMOV_CE_CHAN_IN         5
+#define DMOV_CE_CHAN_OUT        6
+#define DMOV_CE_CRCI_IN         1
+#define DMOV_CE_CRCI_OUT        2
+#define DMOV_CE_CRCI_HASH       3
+#endif
 #define DMOV_SD_AARM_ADDR DMOV_SD2
 #elif defined(CONFIG_ARCH_MSM8X60)
 #define DMOV_SD_SIZE 0x800
@@ -148,6 +158,29 @@ unsigned int msm_dmov_build_crci_mask(int n, ...);
 #define DMOV_NAND_CRCI_CMD     15
 #define DMOV_NAND_CRCI_DATA    3
 
+#if defined(CONFIG_CRYPTO_DEV_QCRYPTO) || \
+		defined(CONFIG_CRYPTO_DEV_QCRYPTO_MODULE) || \
+		defined(CONFIG_CRYPTO_DEV_QCEDEV) || \
+		defined(CONFIG_CRYPTO_DEV_QCEDEV_MODULE)
+
+#define DMOV_CE_CHAN_IN		11
+#define DMOV_CE_CHAN_OUT	12
+
+#define DMOV_CE_CRCI_IN		4
+#define DMOV_CE_CRCI_OUT	5
+#define DMOV_CE_CRCI_HASH	15
+
+
+#define DMOV_CE_IN_CHAN        2
+#define DMOV_CE_IN_CRCI        4
+
+#define DMOV_CE_OUT_CHAN       3
+#define DMOV_CE_OUT_CRCI       5
+
+#define DMOV_CE_HASH_CRCI      15
+
+#else
+
 #define DMOV_CE_IN_CHAN       5
 #define DMOV_CE_IN_CHAN_TZ     11
 #define DMOV_CE_IN_CRCI       1
@@ -155,6 +188,7 @@ unsigned int msm_dmov_build_crci_mask(int n, ...);
 #define DMOV_CE_OUT_CHAN      6
 #define DMOV_CE_OUT_CHAN_TZ    12
 #define DMOV_CE_OUT_CRCI      2
+#endif
 
 #define DMOV_SDC1_CHAN         18
 #define DMOV_SDC1_CRCI         1
