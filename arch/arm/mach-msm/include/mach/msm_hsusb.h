@@ -19,6 +19,63 @@
 
 #include <linux/types.h>
 
+#ifdef CONFIG_USB_MSM_OTG_72K
+#define PHY_TYPE_MASK		0x0F
+#define PHY_TYPE_MODE		0xF0
+#define PHY_MODEL_MASK		0xFF00
+#define PHY_TYPE(x)		    ((x) & PHY_TYPE_MASK)
+#define PHY_MODEL(x)		((x) & PHY_MODEL_MASK)
+
+#define USB_PHY_MODEL_65NM	0x100
+#define USB_PHY_MODEL_180NM	0x200
+#define USB_PHY_MODEL_45NM	0x400
+#define USB_PHY_UNDEFINED	0x00
+#define USB_PHY_INTEGRATED	0x01
+#define USB_PHY_EXTERNAL	0x02
+#define USB_PHY_SERIAL_PMIC 0x04
+
+#define REQUEST_STOP		0
+#define REQUEST_START		1
+#define REQUEST_RESUME		2
+#define REQUEST_HNP_SUSPEND	3
+#define REQUEST_HNP_RESUME	4
+
+/* Flags required to read ID state of PHY for ACA */
+#define PHY_ID_MASK		0xB0
+#define PHY_ID_GND		0
+#define PHY_ID_C		0x10
+#define PHY_ID_B		0x30
+#define PHY_ID_A		0x90
+
+#define phy_id_state(ints)	    ((ints) & PHY_ID_MASK)
+#define phy_id_state_a(ints)	(phy_id_state((ints)) == PHY_ID_A)
+#define phy_id_state_b(ints)	(phy_id_state((ints)) == PHY_ID_B)
+#define phy_id_state_c(ints)	(phy_id_state((ints)) == PHY_ID_C)
+#define phy_id_state_gnd(ints)	(phy_id_state((ints)) == PHY_ID_GND)
+
+enum hsusb_phy_type {
+	UNDEFINED,
+	INTEGRATED,
+	EXTERNAL,
+};
+/* used to detect the OTG Mode */
+enum otg_mode {
+	OTG_ID = 0,   		/* ID pin detection */
+	OTG_USER_CONTROL,  	/* User configurable */
+	OTG_VCHG,     		/* Based on VCHG interrupt */
+};
+
+/* used to configure the default mode,if otg_mode is USER_CONTROL */
+enum usb_mode {
+	USB_HOST_MODE,
+	USB_PERIPHERAL_MODE,
+};
+struct usb_function_map {
+	char name[20];
+	unsigned bit_pos;
+};
+#endif
+
 /* platform device data for msm_hsusb driver */
 
 #ifdef CONFIG_USB_FUNCTION
@@ -132,7 +189,12 @@ struct msm_hsusb_platform_data {
 	bool dock_detect;
 
 	int ac_9v_gpio;
+	void (*configure_ac_9v_gpio) (int);
+
 	char *pclk_src_name;
+
+	unsigned int usb_id2_pin_gpio;
+	void (*usb_host_switch)(int);
 };
 
 struct msm_otg_platform_data {
@@ -158,6 +220,7 @@ struct msm_otg_platform_data {
 	 * now being disabled because of H/w issues
 	 */
 	int			pclk_is_hw_gated;
+	char			*pclk_src_name;
 
 	int (*ldo_init) (int init);
 	int (*ldo_enable) (int enable);
@@ -180,7 +243,12 @@ struct msm_otg_platform_data {
 	void (*chg_connected)(enum chg_type chg_type);
 	void (*chg_vbus_draw)(unsigned ma);
 	int  (*chg_init)(int init);
+#ifdef CONFIG_USB_MSM_OTG_72K
+	int (*config_vddcx)(int high);
+	int (*init_vddcx)(int init);
+#else
 	int (*config_vddcx)(int enable);
+#endif
 
 	struct pm_qos_request_list *pm_qos_req_dma;
 	struct pm_qos_request_list *pm_qos_req_bus;
