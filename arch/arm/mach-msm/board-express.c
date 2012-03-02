@@ -21,7 +21,6 @@
 #include <linux/input.h>
 #include <linux/android_pmem.h>
 #include <linux/mfd/pmic8058.h>
-#include <linux/pmic8058-pwm.h>
 #include <linux/mfd/marimba.h>
 #include <linux/i2c.h>
 #include <linux/i2c-msm.h>
@@ -58,19 +57,18 @@
 #include <mach/msm_iomap.h>
 #include <mach/perflock.h>
 #include <mach/msm_serial_debugger.h>
-#include <mach/rpc_pmapp.h>
 #include <mach/remote_spinlock.h>
 #include <mach/msm_panel.h>
 #include <mach/vreg.h>
 #include <mach/atmega_microp.h>
 #include <mach/htc_battery.h>
+#include <mach/rpc_pmapp.h>
 #include <mach/htc_headset_mgr.h>
 #include <mach/htc_headset_pmic.h>
 #include <mach/htc_headset_misc.h>
+#include <linux/pmic8058-pwm.h>
 #include <mach/htc_mhl.h>
-#include <mach/mpp.h>
 #include <linux/dma-mapping.h>
-
 
 #include "board-express.h"
 #include "devices.h"
@@ -110,8 +108,8 @@ static void express_poweralg_config_init(struct poweralg_config_type *config)
 	config->min_taper_current_ma = 280;
 	config->wait_votlage_statble_sec = 1 * 60;
 	config->predict_timeout_sec = 10;
-	config->polling_time_normal_sec = 30;
-	config->polling_time_extension1_sec = 1 * 60 * 60;
+	config->polling_time_in_charging_sec = 30;
+	config->polling_time_in_discharging_sec = 1 * 60 * 60;
 
 	config->enable_full_calibration = TRUE;
 	config->enable_weight_percentage = TRUE;
