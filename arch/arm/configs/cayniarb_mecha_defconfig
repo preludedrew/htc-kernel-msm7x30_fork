@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.35.14
-# Mon Feb 27 21:39:19 2012
+# Thu Mar  1 21:32:58 2012
 #
 CONFIG_ARM=y
 CONFIG_SYS_SUPPORTS_APM_EMULATION=y
@@ -1782,6 +1782,7 @@ CONFIG_USB_HUB=y
 #
 # CONFIG_USB_GPIO_VBUS is not set
 # CONFIG_USB_ULPI is not set
+# CONFIG_USB_MSM_OTG_72K is not set
 # CONFIG_NOP_USB_XCEIV is not set
 
 #
@@ -2297,6 +2298,9 @@ CONFIG_CRYPTO_DEFLATE=y
 #
 # CONFIG_CRYPTO_ANSI_CPRNG is not set
 CONFIG_CRYPTO_HW=y
+# CONFIG_CRYPTO_DEV_QCRYPTO is not set
+# CONFIG_CRYPTO_DEV_QCE is not set
+# CONFIG_CRYPTO_DEV_QCEDEV is not set
 # CONFIG_BINARY_PRINTF is not set
 
 #
