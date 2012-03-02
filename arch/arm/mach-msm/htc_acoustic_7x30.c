@@ -53,7 +53,7 @@
 #define ACOUSTIC_GET_TABLES 	_IOW(ACOUSTIC_IOCTL_MAGIC, 33, unsigned)
 #define ACOUSTIC_ENABLE_BACK_MIC	_IOW(ACOUSTIC_IOCTL_MAGIC, 34, unsigned)
 #define ACOUSTIC_UPDATE_AIC3254_INFO	_IOW(ACOUSTIC_IOCTL_MAGIC, 36, unsigned)
-
+#define ACOUSTIC_GET_RECEIVER_STATE		_IOW(ACOUSTIC_IOCTL_MAGIC, 37, int)
 #define D(fmt, args...) printk(KERN_INFO "[AUD] htc-acoustic: "fmt, ##args)
 #define E(fmt, args...) printk(KERN_ERR "[AUD] htc-acoustic: "fmt, ##args)
 
@@ -414,6 +414,17 @@ acoustic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 		rc = update_aic3254_info(&cur_aic3254_info);
 		break;
+	case ACOUSTIC_GET_RECEIVER_STATE: {
+		int support_receiver = 1;
+			if (the_ops->support_receiver)
+				support_receiver = the_ops->support_receiver();
+			D("support_receiver: %d\n", support_receiver);
+			if (copy_to_user((void *) arg, &support_receiver, sizeof(int))) {
+					E("acoustic_ioctl: ACOUSTIC_GET_RECEIVER failed\n");
+					rc = -EFAULT;
+			}
+		break;
+	}
 	default:
 		rc = -EINVAL;
 	}
