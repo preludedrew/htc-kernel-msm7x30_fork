@@ -40,7 +40,9 @@
 #include <linux/mfd/msm-adie-codec.h>
 #include <mach/qdsp5v2/audio_dev_ctl.h>
 #include <mach/debug_mm.h>
+#ifdef CONFIG_MSM7KV2_1X_AUDIO
 #include <mach/qdsp5v2_1x/afe.h>
+#endif
 #include <linux/rtc.h>
 
 static struct platform_device *msm_audio_snd_device;
@@ -650,6 +652,7 @@ static int msm_device_volume_put(struct snd_kcontrol *kcontrol,
 	return rc;
 }
 
+#ifdef CONFIG_MSM7KV2_1X_AUDIO
 static int msm_reset_info(struct snd_kcontrol *kcontrol,
 			  struct snd_ctl_elem_info *uinfo)
 {
@@ -755,6 +758,7 @@ static int msm_device_mute_put(struct snd_kcontrol *kcontrol,
 	afe_device_volume_ctrl(afe_dev_id, volume);
 	return 0;
 }
+#endif
 
 static struct snd_kcontrol_new snd_dev_controls[AUDIO_DEV_CTL_MAX_DEV];
 
@@ -815,11 +819,13 @@ static struct snd_kcontrol_new snd_msm_controls[] = {
 		msm_v_call_put, 0),
 	MSM_EXT("Device_Volume", 9, msm_device_volume_info,
 		msm_device_volume_get, msm_device_volume_put, 0),
+#ifdef CONFIG_MSM7KV2_1X_AUDIO
 	MSM_EXT("Reset", 10, msm_reset_info, msm_reset_get, msm_reset_put, 0),
 	MSM_EXT("Device_Mute", 11, msm_device_mute_info,
 		msm_device_mute_get, msm_device_mute_put, 0),
 	MSM_EXT("DualMic Switch", 12, msm_dual_mic_info,
 		msm_dual_mic_get, msm_dual_mic_put, 0),
+#endif
 };
 
 static int msm_new_mixer(struct snd_card *card)
