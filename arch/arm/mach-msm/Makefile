@@ -166,7 +166,7 @@ obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom.o
 obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom-keypad.o
 obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom-microp.o
 obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom-audio.o
-obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom-mmc.o board-kingdom-wifi.o
+obj-$(CONFIG_MACH_KINGDOM)+= board-common-wimax.o board-kingdom-mmc.o board-kingdom-wifi.o
 obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom-rfkill.o
 obj-$(CONFIG_MACH_KINGDOM)+= board-kingdom-panel.o htc_bluetooth.o
 

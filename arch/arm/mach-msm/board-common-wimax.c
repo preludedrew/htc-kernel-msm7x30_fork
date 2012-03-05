@@ -2,7 +2,10 @@
 
 static int mmc_wimax_sdio_status = 0;
 static int mmc_wimax_netlog_status = 0;
-static int mmc_wimax_sdio_interrupt_log_status = 0;
+static int mmc_wimax_sdio_interrupt_log_status = 1; // Defautl is dump GPIO wakeup
+static int mmc_wimax_sdio_wakelock_log_status = 0; // Dump the wakelock log for power consumption debug
+static int mmc_wimax_sdio_lsp_log_status = 0; // Dump LSP power status
+static int mmc_wimax_sdio_wakeup_lite_dump_status = 0; // Dump wakehost reason with lite raw data
 static int mmc_wimax_netlog_withraw_status = 0;
 static int mmc_wimax_cliam_host_status = 0;
 static int mmc_wimax_busclk_pwrsave = 1; // Default is dynamic CLK OFF
@@ -13,6 +16,10 @@ static int mmc_wimax_irq_log_status = 0;
 static int mmc_wimax_sdio_hw_reset = 0; // Default is disable HW reset and counter > 5
 static int mmc_wimax_packet_filter = 0;
 static int mmc_wimax_is_gpio_irq_enabled = 0;
+
+static int mmc_wimax_RD_FIFO_LEVEL_ERROR = 0;
+static int mmc_wimax_FW_freeze_WK_RX = 1;
+static int mmc_wimax_FW_freeze_WK_TX = 0;
 
 int mmc_wimax_set_status(int on)
 {
@@ -87,6 +94,51 @@ int mmc_wimax_get_sdio_interrupt_log(void)
 	return mmc_wimax_sdio_interrupt_log_status;
 }
 EXPORT_SYMBOL(mmc_wimax_get_sdio_interrupt_log);
+
+int mmc_wimax_set_sdio_wakelock_log(int on)
+{
+	printk(KERN_INFO "%s on:%d\n", __func__, on);
+	mmc_wimax_sdio_wakelock_log_status = on;
+	return 0;
+}
+EXPORT_SYMBOL(mmc_wimax_set_sdio_wakelock_log);
+
+int mmc_wimax_get_sdio_wakelock_log(void)
+{
+	//printk(KERN_INFO "%s status:%d\n", __func__, mmc_wimax_sdio_wakelock_log_status);
+	return mmc_wimax_sdio_wakelock_log_status;
+}
+EXPORT_SYMBOL(mmc_wimax_get_sdio_wakelock_log);
+
+int mmc_wimax_set_sdio_lsp_log(int on)
+{
+	printk(KERN_INFO "%s on:%d\n", __func__, on);
+	mmc_wimax_sdio_lsp_log_status = on;
+	return 0;
+}
+EXPORT_SYMBOL(mmc_wimax_set_sdio_lsp_log);
+
+int mmc_wimax_get_sdio_lsp_log(void)
+{
+	//printk(KERN_INFO "%s status:%d\n", __func__, mmc_wimax_sdio_lsp_log_status);
+	return mmc_wimax_sdio_lsp_log_status;
+}
+EXPORT_SYMBOL(mmc_wimax_get_sdio_lsp_log);
+
+int mmc_wimax_set_sdio_wakeup_lite_dump(int on)
+{
+	printk(KERN_INFO "%s on:%d\n", __func__, on);
+	mmc_wimax_sdio_wakeup_lite_dump_status = on;
+	return 0;
+}
+EXPORT_SYMBOL(mmc_wimax_set_sdio_wakeup_lite_dump);
+
+int mmc_wimax_get_sdio_wakeup_lite_dump(void)
+{
+	//printk(KERN_INFO "%s status:%d\n", __func__, mmc_wimax_sdio_wakeup_lite_dump_status);
+	return mmc_wimax_sdio_wakeup_lite_dump_status;
+}
+EXPORT_SYMBOL(mmc_wimax_get_sdio_wakeup_lite_dump);
 
 int mmc_wimax_set_packet_filter(int on)
 {
@@ -206,3 +258,45 @@ int mmc_wimax_get_gpio_irq_enabled(void)
 	return mmc_wimax_is_gpio_irq_enabled;
 }
 EXPORT_SYMBOL(mmc_wimax_get_gpio_irq_enabled);
+
+int mmc_wimax_trigger_RD_FIFO_LEVEL_ERROR(int on)
+{
+	printk(KERN_INFO "%s on:%d\n", __func__, on); 
+  	mmc_wimax_RD_FIFO_LEVEL_ERROR = on;
+	return 0;
+}
+EXPORT_SYMBOL(mmc_wimax_trigger_RD_FIFO_LEVEL_ERROR);
+
+int mmc_wimax_get_RD_FIFO_LEVEL_ERROR(void)
+{
+  	return mmc_wimax_RD_FIFO_LEVEL_ERROR;
+}
+EXPORT_SYMBOL(mmc_wimax_get_RD_FIFO_LEVEL_ERROR);
+// For FW freeze RX WK
+int mmc_wimax_set_wimax_FW_freeze_WK_RX(int on)
+{
+	printk(KERN_INFO "%s on:%d\n", __func__, on);
+	mmc_wimax_FW_freeze_WK_RX = on;
+	return 0;
+}
+EXPORT_SYMBOL(mmc_wimax_set_wimax_FW_freeze_WK_RX);
+
+int mmc_wimax_get_wimax_FW_freeze_WK_RX(void)
+{
+	return mmc_wimax_FW_freeze_WK_RX;
+}
+EXPORT_SYMBOL(mmc_wimax_get_wimax_FW_freeze_WK_RX);
+// For FW freeze TX WK
+int mmc_wimax_set_wimax_FW_freeze_WK_TX(int on)
+{
+	printk(KERN_INFO "%s on:%d\n", __func__, on);
+	mmc_wimax_FW_freeze_WK_TX = on;
+	return 0;
+}
+EXPORT_SYMBOL(mmc_wimax_set_wimax_FW_freeze_WK_TX);
+
+int mmc_wimax_get_wimax_FW_freeze_WK_TX(void)
+{
+	return mmc_wimax_FW_freeze_WK_TX;
+}
+EXPORT_SYMBOL(mmc_wimax_get_wimax_FW_freeze_WK_TX);
