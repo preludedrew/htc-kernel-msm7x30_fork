@@ -79,6 +79,8 @@ struct synaptics_i2c_rmi_platform_data {
 	uint32_t dup_threshold;
 	uint32_t margin_inactive_pixel[4];
 	uint16_t filter_level[4];
+	uint8_t noise_information;
+	uint8_t cable_support;
 };
 
 struct page_description {
@@ -91,6 +93,23 @@ struct syn_finger_data {
 	int y;
 	int w;
 	int z;
+};
+
+struct function_t {
+	uint8_t function_type;
+	uint8_t interrupt_source;
+	uint8_t data_base;
+	uint8_t control_base;
+	uint8_t command_base;
+	uint8_t query_base;
+};
+enum {
+	QUERY_BASE,
+	COMMAND_BASE,
+	CONTROL_BASE,
+	DATA_BASE,
+	INTR_SOURCE,
+	FUNCTION
 };
 
 #endif /* _LINUX_SYNAPTICS_I2C_RMI_H */

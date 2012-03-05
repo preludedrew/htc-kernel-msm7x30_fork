@@ -165,7 +165,6 @@ static struct android_usb_platform_data android_usb_pdata = {
 	.products = usb_products,
 	.num_functions = ARRAY_SIZE(usb_functions_all),
 	.functions = usb_functions_all,
-	.enable_fast_charge=NULL,
 };
 
 static struct platform_device android_usb_device = {

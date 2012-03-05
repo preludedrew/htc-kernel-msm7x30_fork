@@ -35,9 +35,17 @@ obj-$(CONFIG_TOUCHSCREEN_USB_COMPOSITE)	+= usbtouchscreen.o
 obj-$(CONFIG_TOUCHSCREEN_PCAP)		+= pcap_ts.o
 obj-$(CONFIG_TOUCHSCREEN_PENMOUNT)	+= penmount.o
 obj-$(CONFIG_TOUCHSCREEN_S3C2410)	+= s3c2410_ts.o
+ifdef CONFIG_MACH_KINGDOM
+obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_3K)       += synaptics_3k_kingdom.o
+else
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_3K)       += synaptics_3k.o
+endif
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI)	+= synaptics_i2c_rmi.o
+ifdef CONFIG_MACH_KINGDOM
+obj-$(CONFIG_TOUCHSCREEN_ATMEL) += atmel_kingdom.o atmel_224e_kingdom.o
+else
 obj-$(CONFIG_TOUCHSCREEN_ATMEL) += atmel.o
+endif
 obj-$(CONFIG_TOUCHSCREEN_NTRIG) += ntrig.o
 obj-$(CONFIG_TOUCHSCREEN_NTRIG_8x60) += ntrig_8x60.o
 obj-$(CONFIG_TOUCHSCREEN_ELAN_KTF2K)	+= elan_ktf2k.o
