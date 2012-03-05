@@ -62,7 +62,7 @@
 #include <mach/vreg.h>
 #include <mach/atmega_microp.h>
 #include <mach/htc_battery.h>
-#include <linux/tps65200.h>
+#include <linux/tps65200_kingdom.h>
 #include <mach/tpa2051d3.h>
 #include <mach/rpc_pmapp.h>
 #include <mach/htc_headset_mgr.h>

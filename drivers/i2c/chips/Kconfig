@@ -88,6 +88,11 @@ choice
 		bool "Vivo/Mecha Version"
 		help
 		  tps65200 Driver Vivo/Mecha Version
+
+config TPS65200_KINGDOM
+		bool "Kingdom Version"
+		help
+		  tps65200 Driver Kingdom Version
 endchoice
 
 config SENSORS_BMA150
