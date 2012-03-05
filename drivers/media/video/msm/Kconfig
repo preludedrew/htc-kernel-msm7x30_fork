@@ -122,6 +122,13 @@ config OV8810
 	---help---
 	  OmniVision 8M Bayer Sensor
 
+config OV8830
+	bool "Sensor ov8830"
+	depends on MSM_CAMERA
+	default n
+	---help---
+	  OmniVision 8M Bayer Sensor
+
 config OV9665
 	bool "Sensor ov9665"
 	depends on MSM_CAMERA
@@ -178,3 +185,9 @@ config SP3D
 	---help---
 	SHARP 3D Module
 
+config MT9D015
+	bool "Sensor mt9d015 (Aptina 2M)"
+	depends on MSM_CAMERA && ARCH_MSM8X60 && !MSM_CAMERA_V4L2
+	default n
+	---help---
+	  Aptina 2M with Autofocus

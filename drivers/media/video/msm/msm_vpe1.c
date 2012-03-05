@@ -314,7 +314,7 @@ static int vpe_update_scaler(struct video_crop_t *pcrop)
 
 	msm_io_w(src_roi, vpe_device->vpebase + VPE_SRC_SIZE_OFFSET);
 
-#ifdef CONFIG_MACH_EXPRESS
+#if defined(CONFIG_MACH_EXPRESS) || defined(CONFIG_MACH_KINGDOM)
 	src_x = (out_ROI_width - src_ROI_width + 1)/2 - 1;
 	src_y = (out_ROI_height - src_ROI_height + 1)/2 - 1;
 #else
